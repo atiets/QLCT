@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="App Quản lí chi tiêu nefk!"
         android:textSize="30dp"
+        android:textColor="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
