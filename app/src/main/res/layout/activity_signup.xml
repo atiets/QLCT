@@ -24,7 +24,7 @@
         android:textSize="80sp" />
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_tieude"
@@ -34,6 +34,7 @@
         android:layout_marginEnd="20dp"
         android:drawableLeft="@drawable/signup_username"
         android:hint=" Username"
+        android:textColor="@android:color/black"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textColorHint="#51000000"
@@ -44,13 +45,14 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editUsername"
+        android:layout_below="@id/editTextUsername"
         android:layout_centerVertical="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
         android:drawableLeft="@drawable/login_email"
         android:hint=" Email"
+        android:textColor="@android:color/black"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textColorHint="#51000000"
@@ -68,6 +70,7 @@
         android:layout_marginEnd="20dp"
         android:drawableLeft="@drawable/login_password"
         android:hint=" Password"
+        android:textColor="@android:color/black"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textColorHint="#51000000"
@@ -75,7 +78,7 @@
         android:textColorLink="#FA216C" />
 
     <Button
-        android:id="@+id/bt_login"
+        android:id="@+id/bt_signup"
         android:layout_width="176dp"
         android:layout_height="64dp"
         android:layout_below="@id/imageViewBg"
@@ -83,14 +86,14 @@
         android:background="@drawable/rounded_button"
         android:text="Sign Up"
         android:layout_centerHorizontal="true"
-        android:textColor="#FE4E8A"
+        android:textColor="#2182AF"
         android:textSize="30dp"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/tv_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bt_login"
+        android:layout_below="@id/bt_signup"
         android:text="Already an user? Login"
         android:layout_centerHorizontal="true"
         android:textColor="#FF74A3"
