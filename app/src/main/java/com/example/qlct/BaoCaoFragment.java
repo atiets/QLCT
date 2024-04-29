@@ -10,10 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.qlct.databinding.FragmentBaocaoBinding;
+import com.example.qlct.databinding.FragmentLichBinding;
 
 
 public class BaoCaoFragment extends Fragment {
-    FragmentBaocaoBinding binding;
+    com.example.qlct.databinding.FragmentBaocaoBinding binding;
     public BaoCaoFragment() {
     }
     @Override
