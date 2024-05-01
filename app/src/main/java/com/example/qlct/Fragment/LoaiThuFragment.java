@@ -1,150 +1,163 @@
 package com.example.qlct.Fragment;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
 import com.example.qlct.Adapter.LoaiThuAdapter;
 import com.example.qlct.Data.DatabaseHandler;
 import com.example.qlct.Models.LoaiThu;
 import com.example.qlct.R;
 
-import java.util.ArrayList;
-
 public class LoaiThuFragment extends Fragment {
-    Button btnThemLoaiThu;
-    static DatabaseHandler database;
-    static LoaiThuAdapter loaiThuAdapter;
-    ListView listViewLoaiThu;
-    static ArrayList<LoaiThu> loaiThuArrayList;
-    static View vi;
+
+    private DatabaseHandler databaseHandler;
+    private ListView listView;
+    private ArrayList<LoaiThu> arrayList;
+    private Button btnThem;
+    private LoaiThuAdapter adapter; // Khai báo adapter
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_loai_thu, container, false);
-        vi = v;
-        addControls(v);
-        addEvents();
-        return v;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_loai_thu, container, false);
+        initDatabaseSQLite();
+        initViews(view);
+        initListeners();
+        return view;
     }
 
-    private void addEvents() {
-        btnThemLoaiThu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogAddLoaiThu();
-            }
-        });
+    private void initDatabaseSQLite() {
+        databaseHandler = new DatabaseHandler(requireContext());
+        databaseHandler.QueryData("CREATE TABLE IF NOT EXISTS LoaiThu(Id INTEGER PRIMARY KEY AUTOINCREMENT, tenLoaiThu VARCHAR(200))");
+        arrayList = new ArrayList<>();
+        databaseSQLite();
     }
 
-    private void dialogAddLoaiThu() {
-        final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.diag_add_loaithu);
+    private void databaseSQLite() {
+        arrayList.clear();
+        Cursor cursor = databaseHandler.GetData("SELECT * FROM LoaiThu");
+        while (cursor.moveToNext()) {
+            String tenLoaiThu = cursor.getString(1);
+            int id = cursor.getInt(0);
+            arrayList.add(new LoaiThu(id, tenLoaiThu));
+        }
+        if (adapter != null) { // Kiểm tra adapter trước khi cập nhật
+            adapter.notifyDataSetChanged();
+        }
+    }
 
-        Button btnThem = dialog.findViewById(R.id.btnThemLoaiThu);
-        Button btnHuy = dialog.findViewById(R.id.btnHuyThemLoaiThu);
-        final EditText edtThemLoaiThu = dialog.findViewById(R.id.edtNameLoaiThu);
+    private void initViews(View view) {
+        listView = view.findViewById(R.id.listViewLoaiThu);
+        btnThem = view.findViewById(R.id.btnThemLoaiThu);
+        adapter = new LoaiThuAdapter(requireContext(), R.layout.list_loaithu_layout, arrayList, this); // Khởi tạo adapter
+        listView.setAdapter(adapter);
+    }
 
-        btnHuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+    private void initListeners() {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String edtLoaiThu = edtThemLoaiThu.getText().toString();
-                if (edtLoaiThu.isEmpty()) {
-                    edtThemLoaiThu.setError("Không được bỏ trống");
-                } else {
-                    edtThemLoaiThu.setError(null);
-                    database.addLoaiThu(new LoaiThu(0, edtLoaiThu));
-                    loadData();
+            public void onClick(View v) {
+                DiaLogThem();
+            }
+        });
+    }
+
+    private void DiaLogThem() {
+        Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.diag_add_loaithu);
+        EditText edt = dialog.findViewById(R.id.edtNameLoaiThu);
+        Button btnAdd = dialog.findViewById(R.id.btnThemLoaiThu);
+        Button btnHuy = dialog.findViewById(R.id.btnHuyThemLoaiThu);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tenLoaiThu = edt.getText().toString().trim();
+                if(tenLoaiThu.equals("")) {
+                    Toast.makeText(requireContext(), "Vui lòng nhập tên loại thu", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    databaseHandler.QueryData("INSERT INTO LoaiThu VALUES(null, '"+ tenLoaiThu +"')");
+                    Toast.makeText(requireContext(), "Đã thêm loại thu mới", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    databaseSQLite();
                 }
             }
         });
-
-        dialog.show();
-    }
-
-    private static void loadData() {
-        Cursor cursor = database.GetDate("SELECT  * FROM loaithu WHERE deleteGlag = 0");
-        loaiThuArrayList.clear();
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String tenLoaiThu = cursor.getString(1);
-            int deleteGlag = cursor.getInt(2);
-            loaiThuArrayList.add(new LoaiThu(id, tenLoaiThu));
-        }
-        loaiThuAdapter.notifyDataSetChanged();
-    }
-
-    private void addControls(View v) {
-        btnThemLoaiThu = v.findViewById(R.id.btnThemLoaiThu); // Thay thế FloatingActionButton bằng Button
-        database = new DatabaseHandler(getContext());
-        listViewLoaiThu = v.findViewById(R.id.listViewThemLoaiThu);
-        loaiThuArrayList = new ArrayList<>();
-
-        loaiThuAdapter = new LoaiThuAdapter(getContext(), loaiThuArrayList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        listViewLoaiThu.setAdapter(loaiThuAdapter);
-        loadData();
-    }
-
-    public static void loaiThuDelete(int id) {
-        database.QueryData("UPDATE loaithu SET deleteGlag = 1 WHERE id = '" + id + "'");
-        loadData();
-    }
-
-    public static void loaiThuEdit(final Context c, final int id, String nameLoaiThu) {
-        final Dialog dialog = new Dialog(c);
-        dialog.setContentView(R.layout.diag_update_loaithu);
-        Button btnHuy = dialog.findViewById(R.id.btnHuyCNLoaiThu);
-        final EditText edtEditData = dialog.findViewById(R.id.edtNameLoaiThu);
-        Button btnUpdate = dialog.findViewById(R.id.btnCNLoaiThu);
-
-        edtEditData.setText(nameLoaiThu);
-
         btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 dialog.dismiss();
             }
         });
+        dialog.show();
+    }
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+    public void DialogCapNhatLoaiThu(String tenLoaiThu, int id) {
+        Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.diag_update_loaithu);
+        EditText edt = dialog.findViewById(R.id.edtNameLoaiThu);
+        Button btnEdit = dialog.findViewById(R.id.btnCNLoaiThu);
+        Button btnHuy = dialog.findViewById(R.id.btnHuyCNLoaiThu);
+        edt.setText(tenLoaiThu);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String edtEdit = edtEditData.getText().toString();
-                if (edtEdit.isEmpty()) {
-                    edtEditData.setError("Không được bỏ trống");
-                } else {
-                    edtEditData.setError(null);
-
-                    database.QueryData("UPDATE loaithu SET tenLoaiThu = '" + edtEdit + "' WHERE id = '" + id + "'");
-                    loadData();
-                    dialog.dismiss();
-                }
+            public void onClick(View v) {
+                String tenLoaiThu = edt.getText().toString().trim();
+                databaseHandler.QueryData("UPDATE LoaiThu SET tenLoaiThu ='"+ tenLoaiThu +"' WHERE Id = '"+id+"'");
+                Toast.makeText(requireContext(), "Đã cập nhật thành công", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                databaseSQLite();
             }
         });
-
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.menuAddLoaiThu) {
+            DiaLogThem();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void DialogDelete(String tenLoaiThu, int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setMessage("Bạn có muốn xóa loại thu " + tenLoaiThu + " này không");
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                databaseHandler.QueryData("DELETE FROM LoaiThu WHERE Id='" + id + "'");
+                Toast.makeText(requireContext(), "Đã xóa loại thu " + tenLoaiThu + " thành công", Toast.LENGTH_SHORT).show();
+                databaseSQLite();
+            }
+        });
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 }

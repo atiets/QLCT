@@ -1,14 +1,13 @@
 package com.example.qlct.Adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qlct.Fragment.LoaiThuFragment;
 import com.example.qlct.Models.LoaiThu;
@@ -17,24 +16,27 @@ import com.example.qlct.R;
 import java.util.List;
 
 public class LoaiThuAdapter extends BaseAdapter {
-    private List<LoaiThu> loaiThus;
-    private LayoutInflater mLayoutInflater;
-    private Context mContext;
+    private Context context;
+    private int layout;
+    private List<LoaiThu> loaiThu;
+    private LoaiThuFragment fragment;
 
-    public LoaiThuAdapter(Context context, List<LoaiThu> loaiThus) {
-        this.loaiThus = loaiThus;
-        this.mContext = context;
-        mLayoutInflater = LayoutInflater.from(context);
+
+    public LoaiThuAdapter(Context context, int layout, List<LoaiThu> loaiThu, LoaiThuFragment fragment) {
+        this.context = context;
+        this.layout = layout;
+        this.loaiThu = loaiThu;
+        this.fragment = fragment;
     }
 
     @Override
     public int getCount() {
-        return loaiThus.size();
+        return loaiThu.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return loaiThus.get(position);
+        return loaiThu.get(position);
     }
 
     @Override
@@ -42,53 +44,41 @@ public class LoaiThuAdapter extends BaseAdapter {
         return position;
     }
 
-    static class ViewHolder {
-        TextView txtNameLoaiThu;
-        ImageView imgEdtLoaiThu, imgDeleteLoaiThu;
+    private class ViewHolder{
+        TextView textViewLoaiThu;
+        ImageView imageViewEdit;
+        ImageView imageViewDelete;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.list_loaithu_layout, parent, false);
-            holder = new ViewHolder();
-            holder.txtNameLoaiThu = convertView.findViewById(R.id.textViewLoaiThu);
-            holder.imgEdtLoaiThu = convertView.findViewById(R.id.imageViewEditLoaiThu);
-            holder.imgDeleteLoaiThu = convertView.findViewById(R.id.imageViewDeleteLoaiThu);
-            convertView.setTag(holder);
+        ViewHolder viewHolder;
+        if(convertView == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(layout, null);
+            viewHolder.textViewLoaiThu = (TextView) convertView.findViewById(R.id.textViewLoaiThu);
+            viewHolder.imageViewDelete = (ImageView) convertView.findViewById(R.id.imageViewDeleteLoaiThu);
+            viewHolder.imageViewEdit = (ImageView) convertView.findViewById(R.id.imageViewEditLoaiThu);
+            convertView.setTag(viewHolder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        final LoaiThu loaiThu = loaiThus.get(position);
-        holder.txtNameLoaiThu.setText(loaiThu.getNameLoaiThu());
-
-        holder.imgDeleteLoaiThu.setOnClickListener(new View.OnClickListener() {
+         LoaiThu loaithu = loaiThu.get(position);
+        System.out.println(loaithu);
+        viewHolder.textViewLoaiThu.setText(loaithu.getNameLoaiThu());
+        viewHolder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("Bạn có muốn xóa loại thu " + loaiThu.getNameLoaiThu() + " này không?");
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        LoaiThuFragment.loaiThuDelete(loaiThu.getId());
-                    }
-                });
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
+            public void onClick(View v) {
+                Toast.makeText(context, "cap nhat" + loaithu.getNameLoaiThu(), Toast.LENGTH_SHORT).show();
+                fragment.DialogCapNhatLoaiThu(loaithu.getNameLoaiThu(), loaithu.getId());
+                System.out.println("132" + loaithu.getNameLoaiThu());
             }
         });
-
-        holder.imgEdtLoaiThu.setOnClickListener(new View.OnClickListener() {
+        viewHolder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                LoaiThuFragment.loaiThuEdit(mContext, loaiThu.getId(), loaiThu.getNameLoaiThu());
+            public void onClick(View v) {
+                fragment.DialogDelete(loaithu.getNameLoaiThu(), loaithu.getId());
             }
         });
 
