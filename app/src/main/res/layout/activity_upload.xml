@@ -50,7 +50,7 @@
                 android:background="#FD9192"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
-                android:hint="Enter name"
+                android:hint="Enter username"
                 android:gravity="start|center_vertical"
                 android:textColor="#FF0057"/>
 
