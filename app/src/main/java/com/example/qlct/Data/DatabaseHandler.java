@@ -25,17 +25,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_CLASS_TABLE_LOAITHU = "CREATE TABLE IF NOT EXISTS loaiChi(" +
+        String CREATE_CLASS_TABLE_LOAITHU = "CREATE TABLE IF NOT EXISTS LoaiThu(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "tenLoaiThu NVARCHAR(200))";
         sqLiteDatabase.execSQL(CREATE_CLASS_TABLE_LOAITHU);
-        String CREATE_CLASS_TABLE_LOAICHI = "CREATE TABLE IF NOT EXISTS loaiThu(" +
+        String CREATE_CLASS_TABLE_LOAICHI = "CREATE TABLE IF NOT EXISTS LoaiChi(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "tenLoaiChi NVARCHAR(200))";
         sqLiteDatabase.execSQL(CREATE_CLASS_TABLE_LOAICHI);
     }
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
@@ -55,13 +53,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Table Loai Thu
-    private static final String KEY_NAME_TABLE_LOAITHU = "loaithu";
+    private static final String KEY_NAME_TABLE_LOAITHU = "LoaiThu";
     private static final String KEY_TABLE_ID_LOAITHU = "id";
     private static final String KEY_TABLE_NAME_LOAITHU = "tenLoaiThu";
 
     // Table Loai Chi ---
 
-    private static final String KEY_NAME_TABLE_LOAICHI = "loaiChi";
+    private static final String KEY_NAME_TABLE_LOAICHI = "LoaiChi";
     private static final String KEY_TABLE_ID_LOAICHI = "id";
     private static final String KEY_TABLE_NAME_LOAICHI = "tenLoaiChi";
 

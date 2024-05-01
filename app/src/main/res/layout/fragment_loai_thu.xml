@@ -29,7 +29,7 @@
                 android:textStyle="bold" />
 
             <ListView
-                android:id="@+id/listViewThemLoaiThu"
+                android:id="@+id/listViewLoaiThu"
                 android:layout_width="match_parent"
                 android:layout_height="545dp"
                 android:layout_margin="10dp" />

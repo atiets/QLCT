@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.qlct.Data.DatabaseHandler;
 import com.example.qlct.Fragment.ChartFragment;
 import com.example.qlct.Fragment.ChiFragment;
 import com.example.qlct.Fragment.DateFragment;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NhapVaoFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ThuFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_thu);
         }
     }
