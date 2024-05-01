@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.KhoanChiFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFEAEA"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabThemKhoanChi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_add"
+        android:tint="#F44336"
+        app:fabSize="normal"
+        app:layout_anchor="@id/recyclerViewChi"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_margin="10dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

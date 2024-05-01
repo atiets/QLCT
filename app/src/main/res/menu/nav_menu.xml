@@ -6,9 +6,14 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/nav_home"
-            android:title="Trang chủ"/>
+            android:id="@+id/nav_thu"
+            android:icon="@drawable/nav_thu"
+            android:title="Khoản thu"/>
+
+        <item
+            android:id="@+id/nav_chi"
+            android:icon="@drawable/nav_chi"
+            android:title="Khoản chi"/>
 
         <item
             android:id="@+id/nav_date"

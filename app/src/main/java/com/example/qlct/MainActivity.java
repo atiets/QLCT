@@ -12,10 +12,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.qlct.Fragment.ChartFragment;
+import com.example.qlct.Fragment.ChiFragment;
 import com.example.qlct.Fragment.DateFragment;
 import com.example.qlct.Fragment.InforFragment;
 import com.example.qlct.Fragment.SettingFragment;
 import com.example.qlct.Fragment.ShareFragment;
+import com.example.qlct.Fragment.ThuFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,15 +43,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NhapVaoFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            navigationView.setCheckedItem(R.id.nav_thu);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.nav_home) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NhapVaoFragment()).commit();
+        if (itemId == R.id.nav_thu) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ThuFragment()).commit();
+        } else if (itemId == R.id.nav_chi) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChiFragment()).commit();
         } else if (itemId == R.id.nav_date) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DateFragment()).commit();
         } else if (itemId == R.id.nav_chart) {
