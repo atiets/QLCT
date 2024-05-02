@@ -20,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
-
     EditText loginUsername, loginPassword;
     Button loginButton;
     TextView signupRedirectText;
@@ -100,13 +99,16 @@ public class LoginActivity extends AppCompatActivity {
 
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 
+                        // Chuyển sang MainActivity
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        // Truyền dữ liệu
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("username", usernameFromDB);
                         intent.putExtra("password", passwordFromDB);
 
                         startActivity(intent);
+                        finish(); // Kết thúc LoginActivity sau khi chuyển sang MainActivity
                     } else {
                         loginPassword.setError("Invalid Credentials");
                         loginPassword.requestFocus();
