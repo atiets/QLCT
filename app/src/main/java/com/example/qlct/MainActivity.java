@@ -9,11 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.qlct.Data.DatabaseHandler;
 import com.example.qlct.Fragment.ChartFragment;
 import com.example.qlct.Fragment.ChiFragment;
 import com.example.qlct.Fragment.DateFragment;
@@ -26,14 +25,13 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    DatabaseHandler databaseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -69,29 +67,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.nav_about) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InforFragment()).commit();
         } else if (itemId == R.id.nav_logout) {
-            Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
-        } else if (itemId == R.id.nav_out) {
-            thongBaoCloseApp();
+            thongBaoLogOut();
         }
-
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void thongBaoCloseApp(){
+    public void thongBaoLogOut(){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("Bạn có muốn thoát ứng dụng?");
+        builder.setMessage("Bạn có muốn đăng xuất?");
         builder.setCancelable(true);
         builder.setPositiveButton(
-                "Vâng",
+                "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
                         finish();
                         dialog.cancel();
                     }
                 });
         builder.setNegativeButton(
-                "Không",
+                "No",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
