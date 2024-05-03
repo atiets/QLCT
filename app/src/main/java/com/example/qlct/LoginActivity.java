@@ -71,6 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         if (val.isEmpty()) {
             loginPassword.setError("Password cannot be empty");
             return false;
+        } else if (val.length() < 6) { // Kiểm tra mật khẩu có ít nhất 6 ký tự
+            loginPassword.setError("Password must be at least 6 characters long");
+            return false;
         } else {
             loginPassword.setError(null);
             return true;
