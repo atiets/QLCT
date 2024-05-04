@@ -26,4 +26,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "QLCT"
 include(":app")
- 
