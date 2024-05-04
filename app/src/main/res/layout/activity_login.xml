@@ -52,6 +52,7 @@
         android:layout_marginEnd="20dp"
         android:drawableLeft="@drawable/login_password"
         android:hint=" Password"
+        android:inputType="textPassword"
         android:textColor="@android:color/black"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
@@ -71,16 +72,30 @@
         android:textColor="#2182AF"
         android:textSize="30dp"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_forgotpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bt_login"
+        android:text="Forgot Password"
+        android:layout_centerHorizontal="true"
+        android:textColor="#EA296A"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"/>
+
     <TextView
         android:id="@+id/tv_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bt_login"
+        android:layout_below="@id/tv_forgotpass"
         android:text="Are you new user? Sign up"
         android:layout_centerHorizontal="true"
-        android:textColor="#FF74A3"
+        android:textColor="#FD518B"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="15dp"
+        android:gravity="center"/>
 
 </RelativeLayout>
