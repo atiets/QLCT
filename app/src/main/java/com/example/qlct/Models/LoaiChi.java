@@ -11,6 +11,10 @@ public class LoaiChi implements Serializable {
         NameLoaiChi = nameLoaiChi;
     }
 
+    public LoaiChi() {
+
+    }
+
     public int getId() {
         return id;
     }
