@@ -197,7 +197,6 @@ public class KhoanChiFragment extends Fragment {
             System.out.println("tenloaichi" + tenLoaiChi);
             loaiChiArrayList.add(new LoaiChi(idLoaiChi, tenLoaiChi));
             System.out.println("tenloaichi" + loaiChiArrayList);
-
         }
     }
 

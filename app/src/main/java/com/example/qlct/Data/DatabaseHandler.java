@@ -138,7 +138,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             "FOREIGN KEY(" + KEY_TABLE_ID_LOAICHI_KHOANCHI + ") REFERENCES " + KEY_NAME_TABLE_LOAICHI + "(" + KEY_TABLE_ID_LOAICHI + ")" +
             ")";
 
-
     private static final String CREATE_CLASS_TABLE_KHOANTHU = "CREATE TABLE " + KEY_NAME_TABLE_KHOANTHU + "(" +
             KEY_TABLE_ID_KHOANTHU + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             KEY_TABLE_NAME_KHOANTHU + " TEXT," +
@@ -210,9 +209,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //Lấy dữ liệu chi của 1 ngày
     public Cursor GetDailyDataExpenses(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT KhoanChi.tenChi, KhoanChi.soTien, KhoanChi.thoiDiemChi, LoaiChi.tenLoaiChi " +
+        String query = "SELECT * " +
                 "FROM KhoanChi " +
-                "INNER JOIN LoaiChi ON KhoanChi.idLoaiChi = LoaiChi.id " +
                 "WHERE DATE(KhoanChi.thoiDiemChi) = '" + date + "' " +
                 "ORDER BY KhoanChi.thoiDiemChi ASC";
         Cursor cursor = db.rawQuery(query, null);
@@ -243,7 +241,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //Lấy dữ liệu thu của 1 ngày
     public Cursor GetDailyDataIncome(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT KhoanThu.tenThu, KhoanThu.soTien, KhoanThu.thoiDiemThu, LoaiThu.tenLoaiThu " +
+        String query = "SELECT * " +
                 "FROM KhoanThu " +
                 "INNER JOIN LoaiThu ON KhoanThu.idLoaiThu = LoaiThu.id " +
                 "WHERE DATE(KhoanThu.thoiDiemThu) = '" + date + "' " +
