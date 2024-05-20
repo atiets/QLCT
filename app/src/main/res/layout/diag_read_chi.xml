@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title_read_chi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CHI TIẾT KHOẢN CHI"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="#F44336"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Ngày: "
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtNgayChi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="17/5/2024"
+            android:textSize="25sp"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Khoản chi: "
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtKhoanChi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shopping"
+            android:textSize="25sp"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Tiền chi : "
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtTienChi"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="456000"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="47dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="đ"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="Loại chi: "
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtLoaiChi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quần áo"
+                android:textSize="25sp"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnHuyXemKhoanChi"
+            android:layout_width="103dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="Hủy"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+</LinearLayout>

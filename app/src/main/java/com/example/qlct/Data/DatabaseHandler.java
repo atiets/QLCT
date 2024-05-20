@@ -418,6 +418,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return KEY_TABLE_ID_LOAICHI_KHOANCHI;
     }
 
+
+    public ArrayList<LoaiChi> getAllLoaiChi() {
+        ArrayList<LoaiChi> loaiChiList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM LoaiChi";
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        try {
+            if (cursor != null) {
+                int idIndex = cursor.getColumnIndex("id");
+                int nameIndex = cursor.getColumnIndex("tenLoaiChi");
+
+                while (cursor.moveToNext()) {
+                    LoaiChi loaiChi = new LoaiChi();
+
+                    if (idIndex >= 0) {
+                        loaiChi.setId(cursor.getInt(idIndex));
+                    }
+                    if (nameIndex >= 0) {
+                        loaiChi.setNameLoaiChi(cursor.getString(nameIndex));
+                    }
+
+                    loaiChiList.add(loaiChi);
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return loaiChiList;
+    }
 }
 
 

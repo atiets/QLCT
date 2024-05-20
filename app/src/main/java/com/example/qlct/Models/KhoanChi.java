@@ -10,18 +10,15 @@ public class KhoanChi {
     public int deleteFlag;
     public int idLoaiChi;
 
-    public KhoanChi(int idChi, String tenChi, String loaiChi, String thoiDiemChi, int danhGia, int deleteFlag, int idLoaiChi, int soTien) {
+    public KhoanChi(int idChi, String tenChi, String loaiChi, String thoiDiemChi, int soTien, int danhGia, int deleteFlag, int idLoaiChi) {
         this.idChi = idChi;
         this.tenChi = tenChi;
         this.loaiChi = loaiChi;
         this.thoiDiemChi = thoiDiemChi;
+        this.soTien = soTien;
         this.danhGia = danhGia;
         this.deleteFlag = deleteFlag;
         this.idLoaiChi = idLoaiChi;
-        this.soTien = soTien;
-    }
-    public KhoanChi() {
-
     }
 
     public int getIdChi() {
@@ -86,5 +83,8 @@ public class KhoanChi {
 
     public void setSoTien(int soTien) {
         this.soTien = soTien;
+    }
+
+    public KhoanChi() {
     }
 }

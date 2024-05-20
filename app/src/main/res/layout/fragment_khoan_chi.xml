@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.KhoanChiFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewChi"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFEAEA"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textViewKhoanChi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center_horizontal"
+                android:text="DANH SÁCH CÁC KHOẢN CHI"
+                android:textColor="#F44336"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabThemKhoanChi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_add"
-        android:tint="#F44336"
-        app:fabSize="normal"
-        app:layout_anchor="@id/recyclerViewChi"
-        app:layout_anchorGravity="bottom|end"
-        android:layout_margin="10dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listViewKhoanChi"
+                android:layout_width="match_parent"
+                android:layout_height="545dp"
+                android:layout_margin="10dp" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/btnThemKhoanChi"
+                android:text="Thêm khoản chi"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
