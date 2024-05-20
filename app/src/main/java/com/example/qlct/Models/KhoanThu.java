@@ -5,19 +5,29 @@ public class KhoanThu {
     public String tenThu;
     public String loaiThu;
     public String thoiDiemThu;
-    public int danhGia;
-    public int deleteFlag;
-    public int idLoaiThu;
 
-    public KhoanThu(int idThu, String tenThu, String loaiThu, String thoiDiemThu, int danhGia, int deleteFlag, int idLoaiThu) {
+
+
+    public KhoanThu(int idThu, String tenThu, String loaiThu, String thoiDiemThu, int soTien, int danhGia, int deleteFlag, int idLoaiThu) {
         this.idThu = idThu;
         this.tenThu = tenThu;
         this.loaiThu = loaiThu;
         this.thoiDiemThu = thoiDiemThu;
+        this.soTien = soTien;
         this.danhGia = danhGia;
         this.deleteFlag = deleteFlag;
         this.idLoaiThu = idLoaiThu;
     }
+
+    public int soTien;
+    public int danhGia;
+    public int deleteFlag;
+    public int idLoaiThu;
+
+    public KhoanThu() {
+
+    }
+
 
     public int getIdThu() {
         return idThu;
@@ -41,6 +51,13 @@ public class KhoanThu {
 
     public void setLoaiThu(String loaiThu) {
         this.loaiThu = loaiThu;
+    }
+    public void setSoTien(int soTien) {
+        this.soTien = soTien;
+    }
+
+    public int getSoTien() {
+        return soTien;
     }
 
     public String getThoiDiemThu() {

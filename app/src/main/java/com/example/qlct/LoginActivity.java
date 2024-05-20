@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 public class LoginActivity extends AppCompatActivity {
     EditText loginUsername, loginPassword;
     Button loginButton;
-    TextView signupRedirectText, forgotpasswordRedirect;
+    TextView signupRedirectText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         loginPassword = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.bt_login);
         signupRedirectText = findViewById(R.id.tv_signup);
-        forgotpasswordRedirect = findViewById(R.id.tv_forgotpass);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

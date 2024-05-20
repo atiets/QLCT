@@ -10,9 +10,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.qlct.Data.DatabaseHandler;
 import com.example.qlct.Fragment.ChartFragment;
 import com.example.qlct.Fragment.ChiFragment;
 import com.example.qlct.Fragment.DateFragment;
@@ -20,11 +22,19 @@ import com.example.qlct.Fragment.InforFragment;
 import com.example.qlct.Fragment.SettingFragment;
 import com.example.qlct.Fragment.ShareFragment;
 import com.example.qlct.Fragment.ThuFragment;
+import com.example.qlct.Models.KhoanChi;
+import com.example.qlct.Models.KhoanThu;
+import com.example.qlct.Models.LoaiChi;
+import com.example.qlct.Models.LoaiThu;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private DatabaseHandler databaseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_thu);
         }
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
