@@ -33,7 +33,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtupdateNgayThu"
                 android:layout_width="296dp"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtupdateNameThu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtupdateTienThu"
             android:layout_width="264dp"
             android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="Loại chi: "
+                android:text="Loại thu: "
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -156,5 +156,4 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
     </LinearLayout>
-
 </LinearLayout>

@@ -11,6 +11,10 @@ public class LoaiThu implements Serializable {
         NameLoaiThu = nameLoaiThu;
     }
 
+    public LoaiThu() {
+
+    }
+
     public int getId() {
         return id;
     }
