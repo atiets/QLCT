@@ -150,7 +150,6 @@ public class DateFragment extends Fragment {
             Log.e("DateFragment", "databaseHandler is null");
             totalIncomeTextView.setText("0");
         }
-
         updateTotalBalance();
     }
 
