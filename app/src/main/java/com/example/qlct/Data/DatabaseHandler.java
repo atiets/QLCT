@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -241,12 +242,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //Lấy dữ liệu thu của 1 ngày
     public Cursor GetDailyDataIncome(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * " +
-                "FROM KhoanThu " +
-                "INNER JOIN LoaiThu ON KhoanThu.idLoaiThu = LoaiThu.id " +
-                "WHERE DATE(KhoanThu.thoiDiemThu) = '" + date + "' " +
-                "ORDER BY KhoanThu.thoiDiemThu ASC";
-        Cursor cursor = db.rawQuery(query, null);
+        String query = "SELECT " + KEY_TABLE_NAME_KHOANTHU + ", " + KEY_TABLE_SOTIEN_KHOANTHU + ", " +
+                KEY_TABLE_THOIDIEM_KHOANTHU + ", " + "LoaiThu.tenLoaiThu " +
+                "FROM " + KEY_NAME_TABLE_KHOANTHU + " " +
+                "INNER JOIN LoaiThu ON " + KEY_NAME_TABLE_KHOANTHU + "." + KEY_TABLE_ID_LOAITHU_KHOANTHU + " = LoaiThu.id " +
+                "WHERE DATE(" + KEY_TABLE_THOIDIEM_KHOANTHU + ") = ? " +
+                "ORDER BY " + KEY_TABLE_THOIDIEM_KHOANTHU + " ASC";
+        Log.d("GetDailyDataIncome", "Query: " + query);  // Log truy vấn SQL
+        Cursor cursor = db.rawQuery(query, new String[]{date});
         return cursor;
     }
 
@@ -256,17 +259,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         int totalIncome = 0;
 
         if (cursor != null && cursor.moveToFirst()) {
-            int soTienColumn = cursor.getColumnIndex("soTien");
+            int soTienColumn = cursor.getColumnIndex(KEY_TABLE_SOTIEN_KHOANTHU);
             if (soTienColumn != -1) {
                 do {
                     int soTien = cursor.getInt(soTienColumn);
+                    Log.d("CalculateTotalIncome", "soTien: " + soTien);  // Log giá trị soTien để kiểm tra
                     if (soTien >= 0) {
                         totalIncome += soTien;
                     }
                 } while (cursor.moveToNext());
             }
             cursor.close();
+        } else {
+            Log.d("CalculateTotalIncome", "Cursor is null or empty");
         }
+        Log.d("CalculateTotalIncome", "Total Income: " + totalIncome);  // Log tổng thu nhập để kiểm tra
         return totalIncome;
     }
 
@@ -274,54 +281,56 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<KhoanThu> khoanThuList = new ArrayList<>();
         Cursor cursor = GetDailyDataIncome(date);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 KhoanThu khoanThu = new KhoanThu();
 
-                int idThuIndex = cursor.getColumnIndex("idThu");
+                int idThuIndex = cursor.getColumnIndex(KEY_TABLE_ID_KHOANTHU);
                 if (idThuIndex != -1) {
                     khoanThu.setIdThu(cursor.getInt(idThuIndex));
                 }
 
-                int tenThuIndex = cursor.getColumnIndex("tenThu");
+                int tenThuIndex = cursor.getColumnIndex(KEY_TABLE_NAME_KHOANTHU);
                 if (tenThuIndex != -1) {
                     khoanThu.setTenThu(cursor.getString(tenThuIndex));
                 }
 
-                int loaiThuIndex = cursor.getColumnIndex("loaiThu");
+                int loaiThuIndex = cursor.getColumnIndex("tenLoaiThu"); // Assuming "tenLoaiThu" is the column name in your query
                 if (loaiThuIndex != -1) {
                     khoanThu.setLoaiThu(cursor.getString(loaiThuIndex));
                 }
 
-                int thoiDiemThuIndex = cursor.getColumnIndex("thoiDiemThu");
+                int thoiDiemThuIndex = cursor.getColumnIndex(KEY_TABLE_THOIDIEM_KHOANTHU);
                 if (thoiDiemThuIndex != -1) {
                     khoanThu.setThoiDiemThu(cursor.getString(thoiDiemThuIndex));
                 }
 
-                int soTienIndex = cursor.getColumnIndex("soTien");
+                int soTienIndex = cursor.getColumnIndex(KEY_TABLE_SOTIEN_KHOANTHU);
                 if (soTienIndex != -1) {
                     khoanThu.setSoTien(cursor.getInt(soTienIndex));
                 }
 
-                int danhGiaIndex = cursor.getColumnIndex("danhGia");
+                int danhGiaIndex = cursor.getColumnIndex(KEY_TABLE_DANHGIA_KHOANTHU);
                 if (danhGiaIndex != -1) {
                     khoanThu.setDanhGia(cursor.getInt(danhGiaIndex));
                 }
 
-                int deleteFlagIndex = cursor.getColumnIndex("deleteFlag");
+                int deleteFlagIndex = cursor.getColumnIndex(KEY_TABLE_DELETEFLAG_KHOANTHU);
                 if (deleteFlagIndex != -1) {
                     khoanThu.setDeleteFlag(cursor.getInt(deleteFlagIndex));
                 }
 
-                int idLoaiThuIndex = cursor.getColumnIndex("idLoaiThu");
+                int idLoaiThuIndex = cursor.getColumnIndex(KEY_TABLE_ID_LOAITHU_KHOANTHU);
                 if (idLoaiThuIndex != -1) {
                     khoanThu.setIdLoaiThu(cursor.getInt(idLoaiThuIndex));
                 }
 
                 khoanThuList.add(khoanThu);
             } while (cursor.moveToNext());
+            cursor.close();
+        } else {
+            Log.d("getKhoanThuList", "Cursor is null or empty");
         }
-        cursor.close();
         return khoanThuList;
     }
 
@@ -487,6 +496,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         return loaiThuList;
+    }
+
+    public void deleteAllDataFromKhoanChiTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        deleteAllDataFromKhoanChiTable(db);
+        db.close();
+    }
+
+    private static void deleteAllDataFromKhoanChiTable(SQLiteDatabase db) {
+        db.execSQL("DELETE FROM " + KEY_NAME_TABLE_KHOANCHI);
+    }
+    public void deleteAllDataFromLoaiChiTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        deleteAllDataFromLoaiChiTable(db);
+        db.close();
+    }
+    private static void deleteAllDataFromLoaiChiTable(SQLiteDatabase db) {
+        db.execSQL("DELETE FROM " + KEY_NAME_TABLE_LOAICHI);
+    }
+    public void deleteAllDataFromLoaiThuTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        deleteAllDataFromLoaiThuTable(db);
+        db.close();
+    }
+    private static void deleteAllDataFromLoaiThuTable(SQLiteDatabase db) {
+        db.execSQL("DELETE FROM " + KEY_NAME_TABLE_LOAITHU);
+    }
+    public void deleteAllDataFromKhoanThuTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        deleteAllDataFromKhoanThuTable(db);
+        db.close();
+    }
+    private static void deleteAllDataFromKhoanThuTable(SQLiteDatabase db) {
+        db.execSQL("DELETE FROM " + KEY_NAME_TABLE_KHOANTHU);
     }
 }
 

@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -57,6 +58,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ThuFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_thu);
         }
+        /*databaseHandler = new DatabaseHandler(this);
+        databaseHandler.deleteAllDataFromKhoanChiTable();
+        databaseHandler.deleteAllDataFromKhoanThuTable();
+        databaseHandler.deleteAllDataFromLoaiChiTable();
+        databaseHandler.deleteAllDataFromLoaiThuTable();
+        List<LoaiChi> loaiChiList = new ArrayList<>();
+        loaiChiList.add(new LoaiChi(1,"Mua sam"));
+        loaiChiList.add(new LoaiChi(2,"Du lich"));
+        loaiChiList.add(new LoaiChi(3,"Gia dinh"));
+
+        for (LoaiChi loaiChi : loaiChiList) {
+            databaseHandler.addLoaiChi(loaiChi);
+        }
+
+        List<KhoanChi> khoanChiList = new ArrayList<>();
+        khoanChiList.add(new KhoanChi(1, "Mua vay", "Mua sam", "2024-04-17", 50000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(2, "Mua nuoc hoa", "Mua sam", "2024-04-17", 10000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(3, "Mua do an vat", "Mua sam", "2024-04-17", 20000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(4, "Mua mu", "Gia dinh", "2024-04-17", 100000, 0, 3, 3));
+        khoanChiList.add(new KhoanChi(5, "Mua ve may bay", "Du lich", "2024-04-17", 500000, 0, 2, 2));
+
+        khoanChiList.add(new KhoanChi(6, "Mua ao ", "Mua sam", "2024-05-17", 20000, 0, 2, 1));
+        khoanChiList.add(new KhoanChi(7, "Mua ve may bay", "Du lich", "2024-05-17", 500000, 0, 2, 3));
+
+        khoanChiList.add(new KhoanChi(8, "Mua vay", "Mua sam", "2025-04-17", 50000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(9, "Mua nuoc hoa", "Mua sam", "2025-04-17", 10000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(10, "Mua ao cho me", "Gia dinh", "2025-04-17", 20000, 0, 1, 3));
+
+        khoanChiList.add(new KhoanChi(11, "Mua mu", "Gia dinh", "2023-04-17", 100000, 0, 3, 3));
+        khoanChiList.add(new KhoanChi(12, "Mua ve may bay", "Du lich", "2023-04-17", 500000, 0, 2, 2));
+
+        khoanChiList.add(new KhoanChi(13, "Mua vay", "Mua sam", "2026-04-17", 50000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(14, "Mua nuoc hoa", "Mua sam", "2026-04-17", 10000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(15, "Mua do an vat", "Mua sam", "2026-04-17", 20000, 0, 1, 1));
+        khoanChiList.add(new KhoanChi(16, "Mua mu", "Gia dinh", "2026-04-17", 100000, 0, 3, 3));
+        khoanChiList.add(new KhoanChi(17, "Mua ve may bay", "Du lich", "2026-04-17", 500000, 0, 2, 2));
+
+
+        for (KhoanChi khoanChi : khoanChiList) {
+            databaseHandler.addKhoanChi(khoanChi);
+        }
+
+        List<LoaiThu> loaiThuList = new ArrayList<>();
+        loaiThuList.add(new LoaiThu(1,"Luong"));
+        loaiThuList.add(new LoaiThu(2,"Tro Cap"));
+        loaiThuList.add(new LoaiThu(3,"Lam them"));
+        for (LoaiThu loaiThu : loaiThuList) {
+            databaseHandler.addLoaiThu(loaiThu);
+        }
+        List<KhoanThu> khoanThuList = new ArrayList<>();
+        khoanThuList.add(new KhoanThu(1, "Luong thang 11", "Luong", "2024-04-17", 10000, 0, 0, 1));
+        khoanThuList.add(new KhoanThu(2, "Phuc vu", "Lam them", "2024-04-17", 450000, 0, 0, 3));
+        khoanThuList.add(new KhoanThu(3, "Gia su", "Làm them", "2024-04-17", 460000, 0, 0, 3));
+        khoanThuList.add(new KhoanThu(4, "Tro cap xang", "Tro cap", "2024-04-17", 200000, 0, 0, 2));
+
+        khoanThuList.add(new KhoanThu(5, "Tro cao xang", "Tro cap", "2024-05-17", 200000, 0, 0, 2));
+        khoanThuList.add(new KhoanThu(6, "Phuc vu", "Lam them", "2024-05-17", 500000, 0, 0, 3));
+
+        for (KhoanThu khoanThu : khoanThuList) {
+            databaseHandler.addKhoanThu(khoanThu);
+        }*/
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
