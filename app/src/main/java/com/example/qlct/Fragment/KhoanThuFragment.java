@@ -58,15 +58,60 @@ public class KhoanThuFragment extends Fragment {
     String Loai;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_khoan_thu, container, false);
+
+        thuArrayList = new ArrayList<>();
+        loaithuArrayList = new ArrayList<>();
+
+        initDatabaseSQLite();
+        initViews(v);
         addControls(v);
         addEvents();
         return v;
     }
 
+    private void initDatabaseSQLite() {
+        database = new DatabaseHandler(requireContext());
+        database.QueryData("CREATE TABLE IF NOT EXISTS KhoanThu(" +
+                "idThu INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "tenThu NVARCHAR(200)," +
+                "loaiThu NVARCHAR(200)," +
+                "thoiDiemThu DATETIME," +
+                "soTien INTEGER," +
+                "danhGia INTEGER," +
+                "deleteFlag INTEGER," +
+                "idLoaiThu INTEGER," +
+                "FOREIGN KEY(idLoaiThu) REFERENCES LoaiThu(id))");
+        databaseSQLite();
+    }
 
+    private void databaseSQLite() {
+        thuArrayList.clear();
+        Cursor cursor = database.GetData("SELECT * FROM KhoanThu");
+        while (cursor.moveToNext()) {
+            int idThu = cursor.getInt(0);
+            String tenThu = cursor.getString(1);
+            String loaiThu = cursor.getString(2);
+            String thoiDiemThu = cursor.getString(3);
+            int soTien = cursor.getInt(4);
+            int danhGia = cursor.getInt(5);
+            int deleteFlag = cursor.getInt(6);
+            int idLoaiThu = cursor.getInt(7);
+
+            thuArrayList.add(new KhoanThu(idThu, tenThu, loaiThu, thoiDiemThu, soTien, danhGia, deleteFlag, idLoaiThu));
+        }
+        if (thuAdapter != null) {
+            thuAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void initViews(View view) {
+        listViewKhoanThu = view.findViewById(R.id.listViewKhoanThu);
+        btnThemKhoanThu = view.findViewById(R.id.btnThemKhoanThu);
+        thuAdapter = new KhoanThuAdapter(getContext(), R.layout.list_khoanthu_layout, thuArrayList, loaithuArrayList);
+        listViewKhoanThu.setAdapter(thuAdapter);
+    }
     private void addEvents() {
         btnThemKhoanThu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +132,7 @@ public class KhoanThuFragment extends Fragment {
 
         loaithuArrayList = database.getAllLoaiThu();
 
-        thuAdapter = new KhoanThuAdapter(getContext(), R.layout.list_loaithu_layout, thuArrayList, loaithuArrayList);
+        thuAdapter = new KhoanThuAdapter(getContext(), R.layout.list_khoanthu_layout, thuArrayList, loaithuArrayList);
 
         listViewKhoanThu.setLayoutManager(layoutManager);
         listViewKhoanThu.setItemAnimator(new DefaultItemAnimator());

@@ -71,7 +71,7 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = mLayoutInflater.inflate(R.layout.list_loaithu_layout, parent, false);
+        View item = mLayoutInflater.inflate(R.layout.list_khoanthu_layout, parent, false);
         v = item;
         database = new DatabaseHandler(context);
         loaiThuArrayList = database.getAllLoaiThu();
