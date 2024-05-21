@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/tv_title_update_loaichi"
         android:layout_width="match_parent"
@@ -12,10 +13,12 @@
         android:textStyle="bold"
         android:textSize="30dp"
         android:textColor="#F44336"/>
+
     <EditText
         android:id="@+id/edtNameLoaiChi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,20 +27,20 @@
 
         <Button
             android:id="@+id/btnCNLoaiChi"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cập nhật loại chi"
-            android:textColor="@color/white"
-            android:textSize="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button_background"/>
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="Cập nhật"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/btnHuyCNLoaiChi"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="102dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"

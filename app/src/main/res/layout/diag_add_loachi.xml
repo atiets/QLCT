@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/tv_title_add_loaichi"
         android:layout_width="match_parent"
@@ -12,11 +13,13 @@
         android:textStyle="bold"
         android:textSize="30dp"
         android:textColor="#F44336"/>
+
     <EditText
         android:id="@+id/edtNameLoaiChi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tên loại chi mới" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,20 +28,20 @@
 
         <Button
             android:id="@+id/btnThemLoaiChi"
-            android:layout_width="0dp"
+            android:layout_width="112dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Thêm loại chi"
-            android:textColor="@color/white"
-            android:textSize="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button_background"/>
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="Thêm"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/btnHuyThemLoaiChi"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"

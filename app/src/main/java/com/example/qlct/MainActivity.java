@@ -69,9 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DateFragment()).commit();
         } else if (itemId == R.id.nav_chart) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChartFragment()).commit();
-        } else if (itemId == R.id.nav_profile) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingFragment()).commit();
-        }  else if (itemId == R.id.nav_about) {
+        } else if (itemId == R.id.nav_about) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InforFragment()).commit();
         } else if (itemId == R.id.nav_logout) {
             thongBaoLogOut();

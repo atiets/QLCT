@@ -35,7 +35,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtupdateNgayThu"
-                android:layout_width="296dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FEB2B2"
                 android:hint="Cập nhật ngày thu"
@@ -95,34 +95,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="Loại thu: "
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="Loại thu: "
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spupdateLoaiThu"
-                android:layout_width="298dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/boxshadow"
-                android:gravity="center">
-            </Spinner>
-        </LinearLayout>
+        <Spinner
+            android:id="@+id/spupdateLoaiThu"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/boxshadow"
+            android:gravity="center">
+        </Spinner>
 
     </LinearLayout>
 
@@ -147,10 +140,10 @@
         <Button
             android:id="@+id/btnHuyCapNhatThu"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_weight="1"
             android:background="@drawable/button_background"
             android:text="Hủy"
             android:textColor="@color/white"
